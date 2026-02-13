@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Valentine</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/nes.css@2.3.0/css/nes.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Press Start 2P', cursive;
+            background: linear-gradient(180deg, #2d1b4e 0%, #7b205b 40%, #cf4e3b 70%, #f3a683 100%);
+            min-height: 100vh;
+            color: white;
+            margin: 0;
+            overflow-x: hidden;
+            touch-action: manipulation;
+        }
+
+        .screen { display: none; }
+        .screen.active { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; }
+
+        .nes-container.is-rounded { background-color: rgba(255, 255, 255, 0.9); color: black; width: 100%; max-width: 400px; }
+        
+        /* Анимация сердца, которое держит котик */
+        .pixel-heart {
+            display: inline-block;
+            animation: pulse 0.8s infinite alternate;
+            color: #ff4757;
+        }
+        @keyframes pulse {
+            from { transform: scale(1.2); }
+            to { transform: scale(1.5); }
+        }
+
+        .fade-in { animation: fadeIn 0.4s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        #no-btn { transition: all 0.1s ease; z-index: 999; }
+        
+        .photo-grid img { 
+            width: 100%; 
+            aspect-ratio: 1; 
+            object-fit: cover; 
+            border: 4px solid white; 
+            image-rendering: auto; 
+        }
+        
+        .menu-item { display: flex; flex-direction: column; align-items: center; cursor: pointer; }
+        .menu-item p { font-size: 8px; margin-top: 15px; text-shadow: 2px 2px 0px #000; }
+    </style>
+</head>
+<body>
+
+<div id="screen-landing" class="screen active text-center fade-in">
+    <i class="nes-kirby mb-10 scale-150"></i>
+    <h1 class="text-lg mb-8 leading-relaxed">FOR MY VALENTINE, ALWAYS</h1>
+    <button type="button" class="nes-btn is-primary" onclick="showScreen('screen-hub')">
+        PLAY TOGETHER
+    </button>
+</div>
+
+<div id="screen-hub" class="screen fade-in">
+    <div class="nes-container is-rounded with-title mb-10">
+        <p class="title">Main Menu</p>
+        <p class="text-[10px]">Tap an icon to open!</p>
+    </div>
+    
+    <div class="grid grid-cols-2 gap-10 w-full max-w-[280px]">
+        <div class="menu-item" onclick="showScreen('screen-s1')">
+            <i class="nes-icon image is-large"></i>
+            <p>MEMORIES</p>
+        </div>
+        <div class="menu-item" onclick="showScreen('screen-s2')">
+            <i class="nes-icon musical-notes is-large"></i>
+            <p>PLAYLIST</p>
+        </div>
+        <div class="menu-item" onclick="showScreen('screen-s3')">
+            <i class="nes-icon mail is-large"></i>
+            <p>LETTER</p>
+        </div>
+        <div class="menu-item" onclick="showScreen('screen-s4')">
+            <i class="nes-icon star is-large"></i>
+            <p>NOTES</p>
+        </div>
+    </div>
+
+    <button class="nes-btn is-error mt-12 text-[10px]" onclick="showScreen('screen-final')">UNLOCK SECRET?</button>
+</div>
+
+<div id="screen-s1" class="screen fade-in">
+    <h2 class="mb-6 text-sm">MEMORIES</h2>
+    <div class="grid grid-cols-2 gap-2 max-w-xs photo-grid mb-8">
+        <img src="https://cdn.discordapp.com/attachments/1462159573979893762/1471835461759533167/IMG_6719.jpg?ex=69906117&is=698f0f97&hm=8a1efcb68d8d8380c36f2014f97bfec6f7e82e92d35bb943a1da91805496361d&" alt="Memory 1">
+        <img src="https://cdn.discordapp.com/attachments/1462159573979893762/1471835462330089557/IMG_6608.jpg?ex=69906117&is=698f0f97&hm=cbca9d6c3a84761d34975de24308b07c657938040022bcd7d4459d1edfa657ba&" alt="Memory 2">
+        <img src="https://cdn.discordapp.com/attachments/1462159573979893762/1471835462762106941/IMG_6146.jpg?ex=69906117&is=698f0f97&hm=0a3ca41e16940d340074c4819619295fb461efaf21f532f1bdd05187c4355abf&" alt="Memory 3">
+        <img src="https://cdn.discordapp.com/attachments/1462159573979893762/1471835463210762355/IMG_5705.jpg?ex=69906117&is=698f0f97&hm=4a84a8acb6a24974c6124285b79f45a1fb8d365c2df3410fb841482d82799888&" alt="Memory 4">
+    </div>
+    <button class="nes-btn is-warning text-[10px]" onclick="showScreen('screen-hub')">BACK</button>
+</div>
+
+<div id="screen-s2" class="screen fade-in">
+    <h2 class="mb-8 text-sm text-center">OUR VIBE</h2>
+    <div class="mb-8 w-full max-w-xs mx-auto">
+        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/37i9dQZF1DX4pAtJteyweQ?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+    </div>
+    <button class="nes-btn is-warning text-[10px]" onclick="showScreen('screen-hub')">BACK</button>
+</div>
+
+<div id="screen-s3" class="screen fade-in">
+    <div class="nes-container is-rounded">
+        <p class="text-[10px] leading-relaxed">
+            Я очень силна тепя луплуу прям вот такк тепя улплу тва цглазки луплу всо луплу ты у миня такая красивая я хочу с тобой провести жизнь этат мини сайт как пруф того что я гатов пойти учиться новой хуйне чиста ради тебя я осень тебя уеню и люблб лулплулклулу
+        </p>
+    </div>
+    <button class="nes-btn is-warning mt-8 text-[10px]" onclick="showScreen('screen-hub')">BACK</button>
+</div>
+
+<div id="screen-s4" class="screen text-center fade-in">
+    <h2 class="mb-6 text-sm">LITTLE NOTES</h2>
+    <div class="flex flex-col gap-4 mb-8 w-full max-w-xs">
+        <button class="nes-btn is-success text-[10px]" onclick="alert('ти мая лупемая')">COMPLIMENT</button>
+        <button class="nes-btn is-warning text-[10px]" onclick="alert('я всегда скучаю па тебее')">REMINDER</button>
+    </div>
+    <button class="nes-btn is-warning text-[10px]" onclick="showScreen('screen-hub')">BACK</button>
+</div>
+
+<div id="screen-final" class="screen text-center fade-in">
+    <div class="flex flex-col items-center mb-6">
+        <div class="pixel-heart">
+            <i class="nes-icon heart is-large"></i>
+        </div>
+        <i class="nes-bcrikko scale-150 mt-4"></i>
+    </div>
+    
+    <h2 class="text-sm mb-12">WILL YOU BE MY VALENTINE?</h2>
+    
+    <div class="flex gap-4">
+        <button class="nes-btn is-primary" onclick="showScreen('screen-success')">YES!</button>
+        <button id="no-btn" class="nes-btn is-error">NO</button>
+    </div>
+</div>
+
+<div id="screen-success" class="screen text-center fade-in">
+    <i class="nes-icon heart is-large mb-6"></i>
+    <h1 class="text-lg mt-8">YAYY! I LOVE YOU!</h1>
+    <p class="mt-4 text-[10px]">Level Complete! 🏆</p>
+</div>
+
+<script>
+    function showScreen(screenId) {
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.getElementById(screenId).classList.add('active');
+        window.scrollTo(0, 0);
+    }
+
+    const noBtn = document.getElementById('no-btn');
+    function moveNoButton() {
+        const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - 50);
+        const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - 50);
+        noBtn.style.position = 'fixed';
+        noBtn.style.left = x + 'px';
+        noBtn.style.top = y + 'px';
+    }
+    noBtn.addEventListener('mouseover', moveNoButton);
+    noBtn.addEventListener('touchstart', (e) => { e.preventDefault(); moveNoButton(); });
+</script>
+
+</body>
+</html>
